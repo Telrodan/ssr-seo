@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-hero-detail',
@@ -12,15 +13,23 @@ import { HeroService } from '../hero.service';
 })
 export class HeroDetailComponent implements OnInit {
   @Input() hero!: Hero;
+  title = 'Team Manager Hero Detail';
 
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
-    private location: Location
-  ) {}
+    private location: Location,
+    private metaTagService: Meta, private titleService: Title
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.getHero();
+    this.titleService.setTitle(this.title);
+    this.metaTagService.addTags([
+      {name: 'description', content: 'Hero Detail of Team Manager'},
+    ])
   }
 
   getHero(): void {

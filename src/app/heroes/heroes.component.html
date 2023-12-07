@@ -1,21 +1,22 @@
-<h2>My Heroes</h2>
+<h2>My Team</h2>
 
-<div>
-  <label>Hero name:
-    <input #heroName />
-  </label>
-  <!-- (click) passes input value to add() and then clears the input -->
-  <button type="button" (click)="add(heroName.value); heroName.value=''">
-    add
-  </button>
+<div class="new-member">
+  <mat-form-field>
+    <mat-label>New member</mat-label>
+    <input #heroName matInput>
+  </mat-form-field>
+  <button mat-raised-button color="primary"  (click)="add(heroName.value); heroName.value=''">Add</button>
 </div>
 
-<ul class="heroes">
-  <li *ngFor="let hero of heroes">
-    <a routerLink="/detail/{{hero.id}}">
-      <span class="badge">{{hero.id}}</span> {{hero.name}}
-    </a>
-    <button type="button" class="delete" title="delete hero"
-      (click)="delete(hero)">x</button>
-  </li>
-</ul>
+<mat-list role="list">
+  <mat-list-item role="listitem" *ngFor="let hero of heroes">
+    <span class="badge">
+      {{ hero.id }}
+    </span>
+    <span class="name" routerLink="/detail/{{hero.id}}">
+      {{ hero.name }}
+    </span>
+
+    <button mat-flat-button color="warn" class="delete" (click)="delete(hero)">X</button>
+  </mat-list-item>
+</mat-list>
